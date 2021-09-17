@@ -1,29 +1,58 @@
-<h2>Sign up</h2>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  	<%= stylesheet_link_tag "users" %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <title>Sing up</title>
+</head>
+<body>
+<div id="logreg-forms">
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-signin' }) do |f| %>
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign up</h1>
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+            </div>
+            <p style="text-align:center"> OR  </p>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", id:"user-email", class: "form-control", placeholder: 'Email' %>
+                <%= f.text_field :first_name, autocomplete: "First name", id: "user-name", class: "form-control", placeholder: 'First name' %>
+                <%= f.text_field :second_name, autocomplete: "Second name", id: "user-name", class: "form-control", placeholder: 'Second name' %>
+                <%= f.password_field :password, id: "user-pass", autocomplete: "new-password",
+                          class: "form-control", placeholder: "Password", 
+                                placeholder: "Password (6 characters minimum)"   %>
+           
+                
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "user-repeatpass", class: "form-control", placeholder: "Repeat Password" %>
+              
+			
+            <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign up</button>
+				
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+            <a href="#" id="forgot_pswd">Forgot password?</a>
+            <hr>
+            <p>Have an account?</p>
+			      <%= link_to '<button class="btn btn-primary btn-block" type="button" 
+									id="btn-signup">
+									<i class="fas fa-user-plus"></i> Sign in
+						</button>'.html_safe, new_user_session_path %>
+            <hr style='visibility: hidden;'>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+            <p>Want to sell your products? Follow link bellow!</p>
+            <%= link_to 'Learn more', learn_more_path %>
+		<% end %>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
 
-<%= render "users/shared/links" %>
+   
+</body>
+</html>
+  
