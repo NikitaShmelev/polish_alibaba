@@ -11,7 +11,12 @@ class UsersController < ApplicationController
     # # GET /users/1
     # # GET /users/1.json
     def show
-      @users = User.all
+      @user = User.all.find(params[:id])
+      if @user
+        return @user
+      else
+        redirect_to root_path
+      end
     end
   
     # GET /users/1/edit

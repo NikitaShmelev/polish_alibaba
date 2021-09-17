@@ -115,22 +115,31 @@
                 Products
             </a>
           </li>
-          <li>
-            <a href="#" class="nav-link text-white">
+          <% if current_user %>
+            <li>
+            <a href="<% user_url(current_user.id)%>" class="nav-link text-white">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-              Customers
+              Profile
             </a>
           </li>
+          <% end %>
+          
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
         </form>
-
         <div class="text-end">
-          <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-light me-2', type: 'button'%>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-warning', type: 'button' %>
+
+           <% if current_user %>
+            <%= link_to 'Logout', destroy_user_session_path, class: 'btn btn-outline-light me-2', type: 'button'%>
+            <%= link_to 'Cart', user_url(current_user.id), class: 'btn btn-outline-light me-2', type: 'button'%>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-light me-2', type: 'button'%>
+            <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-warning', type: 'button' %>
+          <% end %>
         </div>
+
       </div>
     </div>
   </header>
