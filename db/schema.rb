@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_150509) do
+ActiveRecord::Schema.define(version: 2021_09_18_185535) do
 
   create_table "campaigns", force: :cascade do |t|
-    t.string "name"
+    t.string "campaign_name"
     t.text "description"
     t.string "logo"
     t.string "email", default: "", null: false
@@ -31,6 +31,12 @@ ActiveRecord::Schema.define(version: 2021_09_18_150509) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "nip"
+    t.string "country"
+    t.string "town"
+    t.string "zip_code"
+    t.string "first_adress_line"
+    t.string "second_adress_line"
+    t.integer "contact_phone_number"
     t.index ["email"], name: "index_campaigns_on_email", unique: true
     t.index ["reset_password_token"], name: "index_campaigns_on_reset_password_token", unique: true
   end

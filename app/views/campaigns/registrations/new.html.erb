@@ -9,15 +9,53 @@
   </div>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'Campaign name' %>
+    <%= f.label :campaign_name %><br />
+    <%= f.text_field :campaign_name, autofocus: true, autocomplete: 
+                      "campaign name", placeholder: 'Campaign name' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country, autofocus: true, autocomplete: "country", placeholder: 'Country' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :town %><br />
+    <%= f.text_field :town, autofocus: true, autocomplete: "town", placeholder: 'Town' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_adress_line %><br />
+    <%= f.text_field :first_adress_line, autofocus: true, 
+                    autocomplete: "first adress line", 
+                    placeholder: 'First adressline' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :second_adress_line %><br />
+    <%= f.text_field :second_adress_line, autofocus: true, 
+                    autocomplete: "second adress line", 
+                    placeholder: 'Second adressline' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zip_code %><br />
+    <%= f.text_field :zip_code, autofocus: true, 
+                    autocomplete: "zip code", placeholder: 'Zip-code' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_phone_number %><br />
+    <%= f.number_field :contact_phone_number, autofocus: true, autocomplete: "phone", 
+                                placeholder: 'Contact phone number (Polish)', :min => 0 %>
   </div>
 
   <div class="field">
     <%= f.label :nip %><br />
-    <%= f.number_field :nip, autofocus: true, autocomplete: "NIP", placeholder: 'NIP', :min => 0 %>
+    <%= f.number_field :nip, autofocus: true, autocomplete: "NIP", 
+                          placeholder: 'NIP', :min => 0 %>
   </div>
-
+  
 
   <div class="field">
     <%= f.label :description %><br />

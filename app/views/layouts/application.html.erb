@@ -140,7 +140,7 @@
             </div>
           <% elsif current_campaign %>
             <div class="text-end" id='first'>
-              <button class="btn btn-outline-light me-2" id='dropbtn'>Welcome <%= current_campaign.name %></button>
+              <button class="btn btn-outline-light me-2" id='dropbtn'>Welcome <%= current_campaign.campaign_name %></button>
                 <div class="dropdown-content">
                   <%= link_to 'Campaign Profile', campaign_url(current_campaign.id), class: 'btn btn-outline-light me-2', type: 'button'%>
                   <%= link_to 'Logout', destroy_campaign_session_path, method: :delete, class: 'btn btn-outline-light me-2', type: 'button'%>
