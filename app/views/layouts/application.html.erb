@@ -135,6 +135,8 @@
            <% if current_user %>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light me-2', type: 'button'%>
             <%= link_to 'Cart', user_url(current_user.id), class: 'btn btn-outline-light me-2', type: 'button'%>
+          <% elsif current_campaign %>
+            <%= link_to 'Campaign Profile', campaign_url(current_campaign.id), class: 'btn btn-outline-light me-2', type: 'button'%>
           <% else %>
             <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-light me-2', type: 'button'%>
             <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-warning', type: 'button' %>
