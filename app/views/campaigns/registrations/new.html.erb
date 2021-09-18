@@ -14,6 +14,12 @@
   </div>
 
   <div class="field">
+    <%= f.label :nip %><br />
+    <%= f.number_field :nip, autofocus: true, autocomplete: "NIP", placeholder: 'NIP', :min => 0 %>
+  </div>
+
+
+  <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description, autofocus: true,  placeholder: 'Discription' %>
   </div>

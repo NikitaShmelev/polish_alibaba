@@ -130,19 +130,43 @@
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
         </form>
-        <div class="text-end">
-
-           <% if current_user %>
-            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light me-2', type: 'button'%>
-            <%= link_to 'Cart', user_url(current_user.id), class: 'btn btn-outline-light me-2', type: 'button'%>
+          <% if current_user %>
+            <div class="text-end" id='first'>
+              <button class="btn btn-outline-light me-2" id='dropbtn'>Welcome <%= current_user.first_name %></button>
+              <div class="dropdown-content">
+                <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light me-2', type: 'button'%>
+                <%= link_to 'Cart', user_url(current_user.id), class: 'btn btn-outline-light me-2', type: 'button'%>
+              </div>
+            </div>
           <% elsif current_campaign %>
-            <%= link_to 'Campaign Profile', campaign_url(current_campaign.id), class: 'btn btn-outline-light me-2', type: 'button'%>
+            <div class="text-end" id='first'>
+              <button class="btn btn-outline-light me-2" id='dropbtn'>Welcome <%= current_campaign.name %></button>
+                <div class="dropdown-content">
+                  <%= link_to 'Campaign Profile', campaign_url(current_campaign.id), class: 'btn btn-outline-light me-2', type: 'button'%>
+                  <%= link_to 'Logout', destroy_campaign_session_path, method: :delete, class: 'btn btn-outline-light me-2', type: 'button'%>
+                </div>
+            </div>
           <% else %>
-            <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-light me-2', type: 'button'%>
-            <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-warning', type: 'button' %>
+            <div class="text-end" id='first'>
+              <button class="btn btn-outline-light me-2" id='dropbtn'>Log in</button>
+                <div class="dropdown-content">
+                  <%= link_to 'Customer', new_user_session_path, class: 'btn btn-outline-light me-2', type: 'button'%>
+                  <%= link_to 'Campaign', new_campaign_session_path, class: 'btn btn-warning', type: 'button' %>
+                </div>
+            </div>
+            <div class="text-end" id='second'>
+              <button class="btn btn-warning" id='dropbtn'>Sign up</button>
+                <div class="dropdown-content">
+                  <%= link_to 'Campaign', new_campaign_registration_path, class: 'btn btn-outline-light me-2', type: 'button'%>
+                  <%= link_to 'Customer', new_user_registration_path, class: 'btn btn-warning', type: 'button' %>
+                </div>
+            </div>
           <% end %>
-        </div>
-
+            
+       
+          
+        
+        
       </div>
     </div>
   </header>
