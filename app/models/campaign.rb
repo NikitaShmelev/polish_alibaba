@@ -15,5 +15,6 @@ class Campaign < ApplicationRecord
   validates :zip_code, presence: true
   validates :contact_phone_number, presence: true, length: {is: 9}
 
+  has_many :products
 
 end

@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   get '/learn_more' => 'help#lear_more_campaign', :as => 'learn_more'
 
   root to: 'home#index'
+  
+
+  resources :products
+
 end
