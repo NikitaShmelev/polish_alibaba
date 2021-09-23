@@ -41,18 +41,8 @@ ActiveRecord::Schema.define(version: 2021_09_20_174732) do
     t.index ["reset_password_token"], name: "index_campaigns_on_reset_password_token", unique: true
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.text "short_description"
-    t.string "image"
-    t.float "price"
-    t.integer "quantity"
-    t.integer "campaign_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["campaign_id"], name: "index_products_on_campaign_id"
-  end
+# Could not dump table "products" because of following StandardError
+#   Unknown type 'images' for column 'image'
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
