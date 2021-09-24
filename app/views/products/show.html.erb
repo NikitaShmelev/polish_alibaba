@@ -35,8 +35,10 @@
   <%= @product.campaign_id %>
 </p>
 
-<p>
-  <%= image_tag @product.image.url(:thumb), class: 'mini-img-class' if @product.image? %>
-</p>
+<% if @product.images.attached? %>
+              <% @product.images.each do |image| %>
+              <%= image_tag(image, :class => "img-thumbnail thumb", style: 'height: 400px; width 300px;')%>
+              <%end%>
+              <%end%>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

@@ -72,7 +72,7 @@ class ProductsController < ApplicationController
       params.require(:product).permit(
                     :title, :description, :short_description, 
                     :price, :quantity, :campaign_id,
-                    :image
+                    images: []
                     )
     end
 end

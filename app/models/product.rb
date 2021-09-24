@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
-  mount_uploader :image, ImageUploader
-  belongs_to :campaign
+  # mount_uploaders :image, ImageUploader
+  # belongs_to :campaign
+  has_many_attached :images 
 end
