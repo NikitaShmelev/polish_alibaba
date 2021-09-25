@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
     
     def create
         @order = Order.new(order_params)
-        binding.pry
+        @order.status = 'Pending'
         
         respond_to do |format|
         if @order.save
