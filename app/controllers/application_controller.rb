@@ -12,11 +12,12 @@ class ApplicationController < ActionController::Base
                                                         :nip, :country, :town, :zip_code,
                                                         :first_adress_line, :second_adress_line,
                                                         :contact_phone_number, :short_description,
-                                                        :area_code, :logo
+                                                        :area_code, :logo, :paid
                                                     ])
         devise_parameter_sanitizer.permit(:account_update, keys: [
                                                                 :first_name, :second_name, :name, :description, 
-                                                                :email, :password, :current_password, :images
+                                                                :email, :password, :current_password, :images,
+                                                                :paid
                                                             ])
         
     end

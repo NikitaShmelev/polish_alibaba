@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_180848) do
+ActiveRecord::Schema.define(version: 2021_09_25_203634) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,11 +71,32 @@ ActiveRecord::Schema.define(version: 2021_09_25_180848) do
     t.index ["reset_password_token"], name: "index_campaigns_on_reset_password_token", unique: true
   end
 
-# Could not dump table "orders" because of following StandardError
-#   Unknown type 'status' for column 'status'
+  create_table "orders", force: :cascade do |t|
+    t.string "product_name"
+    t.integer "product_id"
+    t.integer "buyer_id"
+    t.integer "seller_id"
+    t.integer "seller_name"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "delivery_adress"
+    t.integer "paid", default: 0
+    t.string "order_status", default: "Pending"
+  end
 
-# Could not dump table "products" because of following StandardError
-#   Unknown type 'images' for column 'image'
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.text "short_description"
+    t.string "image"
+    t.float "price"
+    t.integer "quantity"
+    t.integer "campaign_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["campaign_id"], name: "index_products_on_campaign_id"
+  end
 
   create_table "statuses", force: :cascade do |t|
     t.string "status_name"

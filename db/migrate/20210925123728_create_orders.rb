@@ -7,7 +7,6 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :seller_id
       t.integer :seller_name
       t.integer :price
-      t.string :status, default: "awaiting confirmation"
       t.timestamps
     end
   end

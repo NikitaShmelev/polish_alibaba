@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 
     def index
+        @orders = Order.all
     end
 
     def new
@@ -11,15 +12,17 @@ class OrdersController < ApplicationController
             @order.seller_id = params[:seller_id]
             @order.buyer_id = current_user.id
             @product = Product.find(params[:product_id])
+            @order.price = @product.price
+            @order.seller_name = Campaign.all.find(params[:seller_id]).campaign_name
         else
-            redirect_to :back, notice: 'Log in before this action'
+            redirect_to root_url, notice: 'Log in before this action'
         end
         
     end
     
     def create
         @order = Order.new(order_params)
-        @order.status = 'Pending'
+        # @order.status = 'Pending'
         
         respond_to do |format|
         if @order.save
@@ -32,11 +35,13 @@ class OrdersController < ApplicationController
         end
     end
     
-    def edit
+    def show
+        set_order
     end
-    
+
     def cansel
     end
+    
     
     def update
     end
@@ -50,7 +55,8 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(
                     :product_name, :product_id, :buyer_id,
-                    :seller_id, :seller_name, :price, :delivery_adress
+                    :seller_id, :seller_name, :price, :delivery_adress, 
+                    :status
                     )
     end
 end
