@@ -3,7 +3,11 @@ class ProductsController < ApplicationController
   before_action :authenticate_campaign!, only: [:show]
   # GET /products or /products.json
   def index
-    @products = Product.all
+    if current_campaign
+      @products = Product.all
+    else
+      redirect_to root_path, alert: 'You have no access to this page'
+    end
   end
 
   # GET /products/1 or /products/1.json

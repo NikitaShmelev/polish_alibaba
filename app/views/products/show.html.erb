@@ -36,9 +36,10 @@
 </p>
 
 <% if @product.images.attached? %>
-              <% @product.images.each do |image| %>
-              <%= image_tag(image, :class => "img-thumbnail thumb", style: 'height: 400px; width 300px;')%>
-              <%end%>
-              <%end%>
+                <%= image_tag(@product.images.first, :class => "bd-placeholder-img card-img-top", style: 'height: 100%; width 225;')%>
+<% else %>
+  <img src="https://www.qries.com/images/banner_logo.png" alt="" class='bd-placeholder-img card-img-top', 
+            style='height: 100%; width 225;'>
+<% end %>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
