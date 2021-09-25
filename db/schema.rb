@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_24_180842) do
+ActiveRecord::Schema.define(version: 2021_09_25_075256) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_180842) do
     t.string "second_adress_line"
     t.integer "contact_phone_number"
     t.integer "area_code", default: 48
+    t.text "short_description"
     t.index ["email"], name: "index_campaigns_on_email", unique: true
     t.index ["reset_password_token"], name: "index_campaigns_on_reset_password_token", unique: true
   end

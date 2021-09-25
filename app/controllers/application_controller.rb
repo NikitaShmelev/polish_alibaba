@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
                                                         :second_name, :email, :password,
                                                         :nip, :country, :town, :zip_code,
                                                         :first_adress_line, :second_adress_line,
-                                                        :contact_phone_number
+                                                        :contact_phone_number, :short_description,
+                                                        :area_code, :logo
                                                     ])
         devise_parameter_sanitizer.permit(:account_update, keys: [
                                                                 :first_name, :second_name, :name, :description, 

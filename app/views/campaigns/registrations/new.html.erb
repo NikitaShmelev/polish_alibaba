@@ -1,5 +1,126 @@
-<h2>Sign up</h2>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<%= stylesheet_link_tag 'campaign_new' %>
+<section class="testimonial py-5" id="testimonial">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-4 py-5 bg-primary text-white text-center ">
+                <div class=" ">
+                    <div class="card-body">
+                        <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+                        <h2 class="py-3">Sign up</h2>
+                        <p>
+                        Some sign up welcome text
+                        Some sign up welcome text
+                        Some sign up welcome text
+                        Some sign up welcome text
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 py-5 border">
+                <h4 class="pb-4">Please fill your camraign's details</h4>
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <%= f.text_field :campaign_name, autofocus: true, autocomplete: "campaign name", 
+                                                            placeholder: 'Campaign name', class: 'form-control' %>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <%= f.email_field :email, autofocus: true, autocomplete: "email", 
+                                                    placeholder: 'Email', class: 'form-control', id: 'inputEmail4'%>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <%= f.number_field :area_code, autofocus: true, autocomplete: "area code", 
+                                                      placeholder: 'Area code', class: 'form-control' %>
+                        </div>
+                        <div class="form-group col-md-9">
+                            <%= f.number_field :contact_phone_number, autofocus: true, autocomplete: "Phone", 
+                                                      placeholder: 'Phone', class: 'form-control' %>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <%= f.text_field :country, autofocus: true, autocomplete: "country", 
+                                                            placeholder: 'Сountry', class: 'form-control' %>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <%= f.text_field :town, autofocus: true, autocomplete: "town", 
+                                                    placeholder: 'Town', class: 'form-control'%>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <%= f.text_field :first_adress_line, autofocus: true, autocomplete: "firt adress line", 
+                                                            placeholder: 'First adress line', class: 'form-control' %>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <%= f.text_field :second_adress_line, autofocus: true, autocomplete: "Second adress line", 
+                                                    placeholder: 'Second adress line', class: 'form-control'%>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <%= f.text_field :zip_code, autofocus: true, autocomplete: "zip-code", 
+                                                    placeholder: 'Zip-code', class: 'form-control'%>
+                        </div>
+                        <div class="form-group col-md-9">
+                          <%= f.number_field :nip, autofocus: true, autocomplete: "NIP", 
+                                                            placeholder: 'NIP', class: 'form-control' %>
+                        </div>
+                  
+                    </div>
+                    <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <%= f.password_field :password, autocomplete: "new-password", 
+                                              class: 'form-control', type: 'password', placeholder: 'Password' %>
+             
+                      </div>
+                      <div class="form-group col-md-6">
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", 
+                                              class: 'form-control', type: 'password', placeholder: 'Password confirmation' %>
+             
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                              <%= f.text_area :short_description, autofocus: true,  
+                                              placeholder: 'Short description', class: 'form-control', 
+                                              id: 'comment' %>
+                        </div>
+                        <div class="form-group col-md-12">
+                              <%= f.text_area :description, autofocus: true,  
+                                              placeholder: 'Description', class: 'form-control', 
+                                              id: 'description' %>
+                        </div>
+                        
+                    </div>
+                    <% if false %>
+                      <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <%= f.file_field :logo, class: 'form-control', type: 'file', id:'formFileDisabled' %>
+                        <label for="formFileDisabled" class="form-label">You can do it later</label>
+                      </div>
+                    </div>
+                    <% end %>
+                    
+                    
+                    <div class="form-row">
+                        <%= f.submit "Sign up", class: "btn btn-success" %>
+                    </div>
+                <% end %>
+                <%= render "campaigns/shared/links" %>
+            </div>
+        </div>
+    </div>
+</section>
+<h2>Sign up</h2>
+<%= stylesheet_link_tag 'campaign_new' %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "campaigns/shared/error_messages", resource: resource %>
 
@@ -58,7 +179,10 @@
     <%= f.number_field :nip, autofocus: true, autocomplete: "NIP", 
                           placeholder: 'NIP', :min => 0 %>
   </div>
-  
+  <div class="field">
+    <%= f.label :short_description %><br />
+    <%= f.text_area :short_description, autofocus: true,  placeholder: 'Short discription' %>
+  </div>
 
   <div class="field">
     <%= f.label :description %><br />
@@ -82,107 +206,3 @@
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
-
-<%= render "campaigns/shared/links" %>
-
-
-source = https://bootsnipp.com/snippets/z8699
-NIKITA WILL FIX IT LATER
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
-
-<div class="container">
-<br>  <p class="text-center">More bootstrap 4 components on <a href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com</a></p>
-<hr>
-
-
-
-
-
-<div class="card bg-light">
-<article class="card-body mx-auto" style="max-width: 400px;">
-	<h4 class="card-title mt-3 text-center">Create Account</h4>
-	<p class="text-center">Get started with your free account</p>
-	<p>
-		<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-		<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-	</p>
-	<p class="divider-text">
-        <span class="bg-light">OR</span>
-    </p>
-	<form>
-	<div class="form-group input-group">
-		<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-		 </div>
-        <input name="" class="form-control" placeholder="Full name" type="text">
-    </div> <!-- form-group// -->
-    <div class="form-group input-group">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-		 </div>
-        <input name="" class="form-control" placeholder="Email address" type="email">
-    </div> <!-- form-group// -->
-    <div class="form-group input-group">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-		</div>
-		<select class="custom-select" style="max-width: 120px;">
-		    <option selected="">+971</option>
-		    <option value="1">+972</option>
-		    <option value="2">+198</option>
-		    <option value="3">+701</option>
-		</select>
-    	<input name="" class="form-control" placeholder="Phone number" type="text">
-    </div> <!-- form-group// -->
-    <div class="form-group input-group">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
-		</div>
-		<select class="form-control">
-			<option selected=""> Select job type</option>
-			<option>Designer</option>
-			<option>Manager</option>
-			<option>Accaunting</option>
-		</select>
-	</div> <!-- form-group end.// -->
-    <div class="form-group input-group">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-		</div>
-        <input class="form-control" placeholder="Create password" type="password">
-    </div> <!-- form-group// -->
-    <div class="form-group input-group">
-    	<div class="input-group-prepend">
-		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-		</div>
-        <input class="form-control" placeholder="Repeat password" type="password">
-    </div> <!-- form-group// -->                                      
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-    </div> <!-- form-group// -->      
-    <p class="text-center">Have an account? <a href="">Log In</a> </p>                                                                 
-</form>
-</article>
-</div> <!-- card.// -->
-
-</div> 
-<!--container end.//-->
-
-<br><br>
-<article class="bg-secondary mb-3">  
-<div class="card-body text-center">
-    <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
-<p class="h5 text-white">Components and templates  <br> for Ecommerce, marketplace, booking websites 
-and product landing pages</p>   <br>
-<p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com  
- <i class="fa fa-window-restore "></i></a></p>
-</div>
-<br><br>
-</article>
