@@ -1,1 +1,41 @@
-some home template
+<%= stylesheet_link_tag 'products_index' %>
+
+<main>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <% @products.each do |product| %>
+          <div class="col" >
+            <div class="card shadow-sm" style='height:100%'>
+              <% if product.images.attached? %>
+                <%= image_tag(product.images.first, :class => "bd-placeholder-img card-img-top", style: 'height: 100%; width 225;')%>
+              <% else %>
+              <a href="<%= product_url(product.id) %>">
+                <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" class='bd-placeholder-img card-img-top', 
+                          style='height: 100%; width 225;'>
+                          </a>
+              <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= product.short_description %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <%= link_to 'Show', product_url(product.id), class: 'btn btn-sm btn-outline-secondary', type: 'button' %>
+                    <%= link_to 'Buy', new_order_path(
+                                          :product_id => product.id, 
+                                          :seller_id => product.campaign_id,
+                                          :product_name => product.title ), class: 'btn btn-sm btn-outline-secondary', type: 'button' %>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                  </div>
+                  <small class="text-muted"><%= product.price %>   ZŁ</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</main>

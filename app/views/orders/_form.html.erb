@@ -1,0 +1,27 @@
+<%= form_for @order do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% @order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.label :delivery_adress %>
+    <%= form.text_field :delivery_adress %>
+  </div>
+    <%= form.hidden_field :buyer_id, :value => current_user.id %>
+    <%= form.hidden_field :product_id, :value => @order.product_id %>
+    <%= form.hidden_field :product_name, :value => @order.product_name %>
+    <%= form.hidden_field :buyer_id, :value => current_user.id %>
+    <%= form.hidden_field :seller_id, :value => @product.campaign_id %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

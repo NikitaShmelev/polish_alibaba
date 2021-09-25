@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_075256) do
+ActiveRecord::Schema.define(version: 2021_09_25_153720) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,8 +71,17 @@ ActiveRecord::Schema.define(version: 2021_09_25_075256) do
     t.index ["reset_password_token"], name: "index_campaigns_on_reset_password_token", unique: true
   end
 
+# Could not dump table "orders" because of following StandardError
+#   Unknown type 'status' for column 'status'
+
 # Could not dump table "products" because of following StandardError
 #   Unknown type 'images' for column 'image'
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "status_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false

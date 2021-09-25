@@ -38,8 +38,9 @@
 <% if @product.images.attached? %>
                 <%= image_tag(@product.images.first, :class => "bd-placeholder-img card-img-top", style: 'height: 100%; width 225;')%>
 <% else %>
-  <img src="https://www.qries.com/images/banner_logo.png" alt="" class='bd-placeholder-img card-img-top', 
-            style='height: 100%; width 225;'>
+  <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" class='bd-placeholder-img card-img-top', 
+                          style='height: 100%; width 225;'>
+                          </a>
 <% end %>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

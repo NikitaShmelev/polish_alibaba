@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
     def index
-        # binding.pry
+        @products = Product.all
     end
 end
