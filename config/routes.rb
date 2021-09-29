@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   
-
+  resources :cart
   resources :products
   resources :orders
 end
