@@ -1,0 +1,8 @@
+<%= form_for @sub_category do |f| %>
+    <%= f.label :name%>
+    <%= f.text_field :name%>
+
+    <h5><%= f.label :category_id %></h5>
+    <%= f.collection_select :category_id, Category.order(:name), :id, :name, { include_blank: false }, class: 'input' %>
+    <%= f.submit %>
+<% end %>
