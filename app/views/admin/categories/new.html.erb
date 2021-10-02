@@ -1,11 +1,11 @@
 <ul>
     <li>
-        <%= form_for [:admin, @category] do |form| %>
-            <%= form.label :name%>
-            <%= form.text_field :name%>
-            <%= form.label :image_url%>
-            <%= form.text_field :image_url%>
-            <%= form.submit %>
+        <%= form_for [:admin, @category] do |f| %>
+            <%= f.label :name%>
+            <%= f.text_field :name%>
+            <%= f.label :image_url%>
+            <%= f.text_field :image_url%>
+            <%= f.submit %>
         <% end %>
     </li>
     <br>

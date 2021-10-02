@@ -18,6 +18,8 @@ class ProductsController < ApplicationController
   def new
     if current_campaign
       @product = Product.new
+      @categories = Category.all
+      @sub_categories = SubCategory.all
       
     else
       redirect_to root_path, alert: "Log in before this action"
@@ -28,19 +30,30 @@ class ProductsController < ApplicationController
   def edit
   end
 
+  
   # POST /products or /products.json
   def create
     @product = Product.new(product_params)
-    @product.campaign_id = current_campaign.id
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+    sub_category_id = params[:product][:sub_category_id]
+    # if sub_category_id.nil?
+      @product.sub_category_id = sub_category_id
+      binding.pry
+      @product.category_id = SubCategory.find(params[:product][:sub_category_id]).category_id
+      
+      @product.campaign_id = current_campaign.id
+      respond_to do |format|
+        if @product.save
+          format.html { redirect_to @product, notice: "Product was successfully created." }
+          format.json { render :show, status: :created, location: @product }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    # else
+    #   render :new
+    # end
+
   end
 
   # PATCH/PUT /products/1 or /products/1.json
@@ -76,7 +89,7 @@ class ProductsController < ApplicationController
       params.require(:product).permit(
                     :title, :description, :short_description, 
                     :price, :quantity, :campaign_id,
-                    images: []
+                    :image_url
                     )
     end
 end

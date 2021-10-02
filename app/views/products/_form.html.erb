@@ -1,3 +1,4 @@
+<%= javascript_include_tag "products", "data-turbolinks-track" => true  %>
 <%= form_for @product, html: {multipart: true} do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
@@ -17,8 +18,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :images, multiple: true, class: 'upload-img', style: 'width: 40%;border: 1px solid black;'%>
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
 
   </div>
 
@@ -43,9 +44,21 @@
     <%= form.number_field :quantity %>
   </div>
   <%= form.hidden_field :campaign_id %>
- 
+  <% if false %>
+    <div class="field">
+    <%= form.label :category %>
+    <%= form.collection_select :category_id, Category.order(:name), :id, :name, { include_blank: false }, class: 'category_sellection' %>
+  </div>
+  <% end %>
+  
+  
+  <div class="field">
+    <%= form.label :sub_category %>
+    <%= form.grouped_collection_select(:sub_category_id, Category.order(:name), :sub_categories, :name, :id, :name) %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+

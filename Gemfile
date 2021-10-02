@@ -50,7 +50,7 @@ end
 group :production do
   gem 'pg'
 end
-
+gem 'coffee-rails'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
