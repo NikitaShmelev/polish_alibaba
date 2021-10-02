@@ -1,5 +1,5 @@
 class ChangeFieldType < ActiveRecord::Migration[6.1]
   def change
-    change_column :users, :admin, :boolean, default: false
+    change_column :users, :admin, :integer, default: 0
   end
 end
