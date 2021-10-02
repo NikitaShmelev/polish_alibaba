@@ -1,0 +1,21 @@
+Users
+<ul>
+    <% @users.each do |user| %>
+      <li>
+        <%= link_to user.email, user_url(user) %>
+        </li>
+    <% end %>
+    
+</ul>
+Campaigns
+<ul>
+    <% @campaigns.each do |campaign| %>
+      <li>
+        <%= link_to campaign.email, campaign_url(campaign) %>
+        </li>
+    <% end %>
+    
+</ul>
+
+<%= link_to 'Create category', new_admin_category_path %>
+<%= link_to 'Create sub category', new_admin_sub_category_path %>

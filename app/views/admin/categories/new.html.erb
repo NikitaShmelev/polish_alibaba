@@ -1,0 +1,26 @@
+<ul>
+    <li>
+        <%= form_for [:admin, @category] do |form| %>
+            <%= form.label :name%>
+            <%= form.text_field :name%>
+            <%= form.label :image_url%>
+            <%= form.text_field :image_url%>
+            <%= form.submit %>
+        <% end %>
+    </li>
+    <br>
+    <li>
+        <%= form_for [:admin, @sub_category] do |f| %>
+            <%= f.label :name%>
+            <%= f.text_field :name%>
+
+            <h5><%= f.label :category_id %></h5>
+            <%= f.collection_select :category_id, Category.order(:name), :id, :name, { include_blank: false }, class: 'input' %>
+            <%= f.submit %>
+        <% end %>
+    </li>
+</ul>
+
+
+
+

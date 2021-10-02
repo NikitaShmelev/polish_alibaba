@@ -26,4 +26,14 @@ Rails.application.routes.draw do
   resources :orders
   resources :categories
   resources :sub_categories
+  
+  
+  namespace :admin do
+    resources :users
+    resources :categories
+    resources :sub_categories
+    resources :orders
+    resources :product
+  end
+  
 end

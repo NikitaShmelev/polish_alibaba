@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+    before_action :authenticate_user!
     # before_action :set_user, only: [:show, :edit, :update] # probably want to keep using this
     
     # GET /users
@@ -11,7 +11,15 @@ class UsersController < ApplicationController
     # # GET /users/1
     # # GET /users/1.json
     def show
-      @orders = Order.all
+      if current_user.admin?
+        @users = User.all
+        @products = Product.all
+        @campaigns = Campaign.all
+        @orders = Order.all
+      else
+        @orders = Order.all
+
+      end
      
     end
   
@@ -19,6 +27,7 @@ class UsersController < ApplicationController
     def edit
   
     end
+
   
     # # PATCH/PUT /users/1
     # # PATCH/PUT /users/1.json
