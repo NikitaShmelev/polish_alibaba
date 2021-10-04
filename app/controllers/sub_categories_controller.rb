@@ -2,7 +2,13 @@ class SubCategoriesController < ApplicationController
     def show
         
         @sub_category = SubCategory.find(params[:id])
-        
+        @products = []
+        Product.all.each do |product|
+
+        if product.sub_category_id == params[:id].to_i
+          @products.append(product)
+        end
+      end
     end
 
     def new

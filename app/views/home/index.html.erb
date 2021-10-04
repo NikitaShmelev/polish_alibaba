@@ -49,9 +49,7 @@
     <div class="row no-gutters">
         <!-- Category-->
         <% @categories.each do |category| %>
-            <% @sub_categories.each do |sub_category| %>
-        
-                <div class="col-lg-3 col-sm-4 col-6 category-card border border-collapse">
+            <div class="col-lg-3 col-sm-4 col-6 category-card border border-collapse">
                     <div class="card border-0">
                         <a class="d-block" href="<%= category_url(category) %>"><img class="d-block" height='232px' src="<%= category.image_url %>" alt="Video Games"></a>
                         <div class="card-body pb-2">
@@ -61,6 +59,9 @@
                             <span class="d-block mb-3 font-size-xs text-muted">Starting from <span class="font-weight-semibold">$19.00</span></span>
                             <div class="list-group list-group-flush font-size-sm">
                             
+            <% @sub_categories.each do |sub_category| %>
+        
+                
                             <% if sub_category.category_id == category.id %>
                               <a class="list-group-item list-group-item-action" href="<%= sub_category_url(sub_category) %>">
                                <%= sub_category.name %>
@@ -69,11 +70,12 @@
                             <% end %>
                             
                             
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            
             <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
         <% end %>
     </div>
 </div>

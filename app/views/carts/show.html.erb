@@ -26,8 +26,13 @@
                             <div class="product-info">
                                 <h4 class="product-title"><a href="<%= product_url(line_item.product)%>">
                                 <%= line_item.product.title %>
-                                </a></h4><span><em>Size:</em> 10.5</span><span><em>Color:</em> Dark Blue
+                                </a></h4>
+                                <span><em>Size:</em> 10.5</span>
+                                <span><em>Color:</em> Dark Blue
                                 add later</span>
+                                <span><em>Seller:</em>
+                                <% campaign = Campaign.find(line_item.product.campaign_id)%>
+                                <%= link_to campaign.campaign_name, campaign_path(campaign.id) %></span>
                             </div>
                         </div>
                     </td>
@@ -39,7 +44,7 @@
                             
                         </div>
                     </td>
-                    <td class="text-center text-lg text-medium"><%= number_to_currency(line_item.product.price) %></td>
+                    <td class="text-center text-lg text-medium"><%= line_item.product.price %> ZŁ</td>
                     <td class="text-center text-lg text-medium"><%= line_item.product.discount %></td>
                     <td class="text-center">
                         <a class="remove-from-cart" href='<%= line_item_path(line_item) %>', data-method="delete" data-toggle="tooltip" title="" data-original-title="Remove item" >
@@ -59,7 +64,7 @@
             </form>
         </div>
         <div class="column text-lg">Subtotal: <span class="text-medium">
-                        <%= number_to_currency(@cart.sub_total) %>
+                        <%= @cart.sub_total%> ZŁ
                         </span></div>
     </div>
     <div class="shopping-cart-footer">

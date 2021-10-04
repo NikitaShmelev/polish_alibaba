@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     sub_category_id = params[:product][:sub_category_id]
     # if sub_category_id.nil?
       @product.sub_category_id = sub_category_id
-      binding.pry
+      
       @product.category_id = SubCategory.find(params[:product][:sub_category_id]).category_id
       
       @product.campaign_id = current_campaign.id
