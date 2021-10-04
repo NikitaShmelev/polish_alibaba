@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_224610) do
+ActiveRecord::Schema.define(version: 2021_10_04_155949) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 2021_10_02_224610) do
     t.string "image_url"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer "quantity", default: 1
+    t.integer "product_id"
+    t.integer "cart_id"
+    t.integer "order_id", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "product_name"
     t.integer "product_id"
@@ -109,6 +118,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_224610) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "category_id"
     t.integer "sub_category_id"
+    t.integer "discount", default: 0
     t.index ["campaign_id"], name: "index_products_on_campaign_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end

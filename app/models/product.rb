@@ -8,4 +8,5 @@ class Product < ApplicationRecord
   validates :image_url, presence: true
   has_one :category
   has_one :sub_category
+  has_many :line_items, dependent: :destroy
 end

@@ -4,7 +4,8 @@ class CategoriesController < ApplicationController
     
       @products = []
       Product.all.each do |product|
-        if product.category_id == params[:id]
+
+        if product.category_id == params[:id].to_i
           @products.append(product)
         end
       end
