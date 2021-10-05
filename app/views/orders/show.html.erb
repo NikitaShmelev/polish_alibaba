@@ -17,7 +17,7 @@
 									<div class="col-xs-6">
 										<address>
 											<strong>Shippment To:</strong><br>
-											<%= @order.delivery_adress %><br>
+											<%= @order.adress %><br>
 										</address>
 									</div>
 									<div class="col-xs-6 text-right">
@@ -74,6 +74,8 @@
 											</thead>
 											<tbody>
 												<tr>
+													<% if false %>
+
 													<td>1</td>
 													<td><strong>
                                                         <%= link_to @order.product_name, product_url(@order.product_id), class: 'nav-btn' %>
@@ -83,7 +85,7 @@
                                                     <td class="text-center">0 ZŁ</td>
 													<td class="text-right"><%= @order.price %>ZŁ</td>
 												</tr>
-												
+<% end %>												
 											</tbody>
 										</table>
 									</div>									
@@ -91,7 +93,10 @@
                                 <% if current_user %>
 								<div class="row">
 									<div class="col-md-12 text-right identity">
+									<% if false %>
                                         <strong><%= link_to @order.seller_name, campaign_path(@order.seller_id) %></strong>
+									  
+									<% end %>
 									</div>
 								</div>
                                 <% end %>
