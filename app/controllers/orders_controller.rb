@@ -16,26 +16,38 @@ class OrdersController < ApplicationController
     
     def create
         
-        used_ids = []
+        used_campaigns_ids = []
         orders = []
         @current_cart.line_items.each do |item|
-            if used_ids.include?(item.product.id)
-                puts 'OK'
+            if used_campaigns_ids.include?(item.product.campaign_id)
+                orders.each do |order|
+                    if order.seller_id == item.product.campaign_id and order.buyer_id == current_user.id
+                        binding.pry
+                        item.update(order_id: order.id)
+                        order.line_items << item
+                        break
+                    end
+                end
             else
                 @order = Order.new(order_params)
+                used_campaigns_ids << item.product.campaign_id
+                @order.seller_id = item.product.campaign_id
+                # @order.product_id = item.product.id
+                # @order.quantity = item.quantity
+                @order.buyer_id = current_user.id
+                @order.line_items << item
                 
-                used_ids << item.product.campaign_id
+                @order.status = 'Pending'
+                @order.save
+                orders << @order
+                # binding.pry
             end
-            @order.seller_id = item.product.campaign_id
-            @order.buyer_id = current_user.id
-            @order.line_items << item
+            
+            # binding.pry
             item.cart_id = nil
-            orders << @order
         end
         
-        orders.each do |order|
-            order.save
-        end
+        
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         redirect_to root_path
@@ -53,12 +65,54 @@ class OrdersController < ApplicationController
     end
     
     def show
-        set_order
+        @order = set_order
+        if current_user
+            if @order.buyer_id == current_user.id
+                return @order
+            else
+                redirect_to root_path, notice: 'You have no access to this page'
+            end
+            
+        elsif current_campaign
+            if current_campaign.id == @order.seller_id
+                return @order
+            else
+                redirect_to root_path, notice: 'You have no access to this page'
+            end
+        end
     end
 
-    def cansel
+    def cancel
+        @order = set_order
+        @order.update(status: 'Cancelled')
+        redirect_to @order
     end
     
+    def change_payment
+        if current_campaign
+            @order = set_order
+            if current_campaign.id == @order.seller_id
+                @order.update(paid: params[:paid].to_i)
+                redirect_to @order
+            else
+                redirect_to root_path, notice: 'You have no access to this page'
+            end
+        end
+    end
+
+
+    def change_status
+        if current_campaign
+            @order = set_order
+            if current_campaign.id == @order.seller_id
+                @order.update(status: params[:status])
+                redirect_to @order
+            else
+                redirect_to root_path, notice: 'You have no access to this page'
+            end
+        end
+        
+    end
     
     def update
     end
@@ -72,8 +126,7 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(
                     :buyer_id,
-                    :adress, 
-                    :status
+                    :adress,
                     )
     end
 end

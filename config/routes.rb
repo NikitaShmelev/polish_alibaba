@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   delete 'line_items/:id' => "line_items#destroy"
   resources :products
   resources :orders
+  post 'orders/:id/cancel' => 'orders#cancel', as: 'cancel_order'
+  post 'orders/:id/change_order_status' => 'orders#change_status', as: 'change_status'
+  post 'orders/:id/change_payment_status' => 'orders#change_payment', as: 'change_payment'
   resources :categories
   resources :sub_categories
   

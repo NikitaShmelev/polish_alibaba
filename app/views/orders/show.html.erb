@@ -15,8 +15,9 @@
 								<hr>
 								<div class="row">
 									<div class="col-xs-6">
+										<strong>Shippment To:</strong><br>
 										<address>
-											<strong>Shippment To:</strong><br>
+											
 											<%= @order.adress %><br>
 										</address>
 									</div>
@@ -24,6 +25,7 @@
 										
 									</div>
 								</div>
+								
 								<div class="row">
 									<div class="col-xs-6">
                                         <% if @order.paid == 0 %>
@@ -36,27 +38,98 @@
                                                 <% end %>
                                                 
 										    </address>
+											<% if current_campaign %>
+											
+												<% if current_campaign.id == @order.seller_id %>
+													<div class="col-xs-6 text-right" id='order_status'>
+														<a class="btn btn-outline-light me-2" id='dropbtn'><strong>Update Payment status</strong><br></a>
+														<div class="dropdown-content" id='order'>
+															<%= link_to 'PAID', change_payment_path(
+																								@order,
+																								paid: 1
+																								), data: {confirm: "Are you sure?"}, method: :post %>
+															<%= link_to 'NOT PAID', change_payment_path(
+																									order: @order,
+																									paid: 0
+																									), data: {confirm: "Are you sure?"}, method: :post %>
+														</div>
+													</div>
+												<% end %>
+										  
+										<% end %>
                                         <% else %>
-                                            <address style='color: green'>
+                                            <div style='color: green'>
                                                 <strong>Payment Method:</strong><br>
                                                 Visa ending **** 1234<br>
                                                 h.elaine@gmail.com<br>
-										    </address>
+										    </div>
                                         <% end %>
 										
 									</div>
+									
 									<div class="col-xs-6 text-right">
 										<address>
 											<strong>Order Date:</strong><br>
 											<%= @order.created_at.to_date %>
 										</address>
 									</div>
-                                    <div class="col-xs-6 text-right" style='color: green'>
+									<% if @order.status == 'Cancelled' %>
+										<div class="col-xs-6 text-right" style='color: red'>
 										
 											<strong>Order Status:</strong><br>
-											<%= @order.order_status %>
+											<%= @order.status %>
+											
+											
+										</div>
 										
-									</div>
+									<% else %>
+										<div class="col-xs-6 text-right" style='color: green'>
+											
+												<strong>Order Status:</strong><br>
+												<%= @order.status %>
+											
+										</div>
+										<% if current_campaign %>
+											
+											<% if current_campaign.id == @order.seller_id %>
+											 	<div class="col-xs-6 text-right" id='order_status'>
+													<a class="btn btn-outline-light me-2" id='dropbtn'><strong>Update order status</strong><br></a>
+													<div class="dropdown-content" id='order'>
+														<%= link_to 'Pending', cancel_order_path(@order), data: {confirm: "Are you sure?"}, method: :post %>
+														<%= link_to 'Awaiting Payment', change_status_path(
+																								order: @order,
+																								status: 'Awaiting Payment'), method: :post %>
+														<%= link_to 'Awaiting Shipment', change_status_path(
+																								order: @order,
+																								status: 'Awaiting Shipment'), method: :post %>
+														<%= link_to 'Awaiting Pickup', change_status_path(
+																								order: @order,
+																								status: 'Awaiting Pickup'), method: :post %>
+														<%= link_to 'Shipped', change_status_path(
+																								order: @order,
+																								status: 'Shipped'), method: :post %>
+														<%= link_to 'Cancelled', change_status_path(
+																								order: @order,
+																								status: 'Cancelled'
+																								), data: {confirm: "Are you sure?"}, method: :post %>
+														<%= link_to 'Refunded', change_status_path(
+																								order: @order,
+																								status: 'Refunded'), method: :post %>
+														<%= link_to 'Complited', change_status_path(
+																								order: @order,
+																								status: 'Complited'), method: :post %>
+													</div>
+												</div>
+											<% end %>
+										  
+										<% end %>
+										
+												
+													
+											
+									<% end %>
+									
+                                    
 								</div>
 								<div class="row">
 									<div class="col-md-12">
@@ -65,44 +138,59 @@
 											<thead>
 												<tr class="line">
 													<td><strong>#</strong></td>
-													<td class="text-center"><strong>ITEMS</strong></td>
+													<td class="text-center"><strong>Items</strong></td>
                                                     <td class="text-right"><strong>Price</strong></td>
                                                     <td class="text-right"><strong>Sale</strong></td>
+													<td class="text-center"><strong>Quantity</strong></td>
 													<td class="text-center"><strong>Shippment</strong></td>
 													<td class="text-right"><strong>SUBTOTAL</strong></td>
 												</tr>
 											</thead>
 											<tbody>
+												<% @order.line_items.each do |item| %>
 												<tr>
-													<% if false %>
+													  
+													
 
-													<td>1</td>
-													<td><strong>
-                                                        <%= link_to @order.product_name, product_url(@order.product_id), class: 'nav-btn' %>
-                                                    </strong><br><%= @order.product_name %></td>
-													<td class="text-center"><%= @order.price %>ZŁ</td>
-													<td class="text-center">0 ZŁ</td>
-                                                    <td class="text-center">0 ZŁ</td>
-													<td class="text-right"><%= @order.price %>ZŁ</td>
+													<td class="text-right"><%= @order.line_items.index(item)%></td>
+													<td class="text-center"><strong>
+                                                        <%= link_to item.product.title, 
+																	product_url(item.product.id), class: 'nav-btn' %>
+                                                    	</strong>
+													
+													</td>
+													<td class="text-left"><%= item.product.price %> ZŁ</td>
+													<td class="text-left"><%= item.product.discount %> ZŁ</td>
+													<td class="text-center"><%= item.quantity %></td>
+													<td class="text-center"><%= @order.adress %></td>
+													<td class="text-right"><%= item.total_price %> ZŁ</td>
 												</tr>
-<% end %>												
+												<% end %>								
 											</tbody>
+											<tfoot>
+												<tr>
+													<td>Sum</td>
+													<td class="text-center"><%= @order.sub_total %> ZŁ</td>
+												</tr>
+											</tfoot>
 										</table>
 									</div>									
 								</div>
                                 <% if current_user %>
-								<div class="row">
-									<div class="col-md-12 text-right identity">
-									<% if false %>
-                                        <strong><%= link_to @order.seller_name, campaign_path(@order.seller_id) %></strong>
-									  
-									<% end %>
+									<div class="row">
+										<div class="col-md-12 text-right identity">
+										<% if false %>
+											<strong><%= link_to @order.seller_name, campaign_path(@order.seller_id) %></strong>
+										
+										<% end %>
+										</div>
 									</div>
-								</div>
                                 <% end %>
 							</div>
 						</div>
 					</div>
-					<!-- END INVOICE -->
+					<% if @order.status == 'Pending' and current_user %>
+						<%= link_to 'Cancel order?', cancel_order_path(@order), data: {confirm: "Are you sure?"}, method: :post %>
+					<% end %>
 				</div>
 </div>
