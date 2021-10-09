@@ -43,39 +43,42 @@
 </main>
 <% end %>
 <% end %>
-
-<div class="container pb-5 mb-sm-2" style='margin-top: 3vh'>
+<%= stylesheet_link_tag 'home' %>
+<div class="container pb-5 mb-sm-2" style='margin-top: 3vh' id='categories_drop_down' >
     <!-- Categories grid-->
     <div class="row no-gutters">
         <!-- Category-->
         <% @categories.each do |category| %>
-            <div class="col-lg-3 col-sm-4 col-6 category-card border border-collapse">
-                    <div class="card border-0">
-                        <a class="d-block" href="<%= category_url(category) %>"><img class="d-block" height='232px' src="<%= category.image_url %>" alt="Video Games"></a>
-                        <div class="card-body pb-2">
-                            <h2 class="h6 mb-2">
-                            <%= link_to category.name, category_url(category) %>
-                            </h2>
-                            <span class="d-block mb-3 font-size-xs text-muted">Starting from <span class="font-weight-semibold">$19.00</span></span>
-                            <div class="list-group list-group-flush font-size-sm">
-                            
-            <% @sub_categories.each do |sub_category| %>
-        
-                
+            <div class="col-lg-3 col-sm-4 col-6 category-card  border-collapse" >
+              <div class="card border-0">
+                        <a class="d-block" href="<%= category_url(category) %>">
+                        <% if false %>
+                          <img class="d-block" height='232px' src="<%= category.image_url %>" alt="Video Games">
+                        <% end %>
+                        
+                        </a>
+                <div class="card-body pb-2" id='text-end'>
+                        <h2 class="h6 mb-2">
+                        <%= link_to category.name, category_url(category) %>
+                        </h2>
+                        <span class="d-block mb-3 font-size-xs text-muted">Starting from <span class="font-weight-semibold">$19.00</span></span>
+
+                        <div class="list-group list-group-flush font-size-sm" id='dropdown-content'>
+                          <% @sub_categories.each do |sub_category| %>
                             <% if sub_category.category_id == category.id %>
                               <a class="list-group-item list-group-item-action" href="<%= sub_category_url(sub_category) %>">
-                               <%= sub_category.name %>
+                              <%= sub_category.name %>
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right ml-1" style="width: .875rem; height: .875rem;">
                                 <polyline points="9 18 15 12 9 6"></polyline></svg></a>
                             <% end %>
-                            
-                            
-                            
-            <% end %>
+                          <% end %>
                   </div>
                 </div>
               </div>
+
             </div>
+            
         <% end %>
     </div>
 </div>
+
