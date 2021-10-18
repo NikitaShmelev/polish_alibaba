@@ -1,0 +1,50 @@
+<%= turbo_stream_from @single_room %>
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<div class="row">
+  <div class="col-md-2">
+    <h5> Hi <%= "#{@current_user.first_name} #{@current_user.second_name}" %> </h5>
+    <h4> Users </h4>
+    <div>
+      <%= turbo_stream_from "users" %>
+      <div id="users">
+        <%= render "users" %>
+      </div>
+    </div>
+    <h4> Rooms </h4>
+    <%= render partial: "layouts/new_room_form" %>
+    <div>
+      <%= turbo_stream_from "rooms" %>
+      <div id="rooms">
+        <%= render "rooms" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10 bg-dark text-light">
+    <% if @single_room %>
+      <h4 class="text-center"> ROOM NAME: <%= @single_room.name %> </h4>
+    <% end %>
+  <div id="messages">
+    <% if @messages %>
+      <%= render @messages %>
+    <%= render partial: 'layouts/new_message_form' %>
+    <% end %>
+     
+
+  </div>
+  </div>
+
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_09_171219) do
+ActiveRecord::Schema.define(version: 2021_10_16_184641) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,16 @@ ActiveRecord::Schema.define(version: 2021_10_09_171219) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "buyer_id"
     t.datetime "created_at", precision: 6, null: false
@@ -100,6 +110,15 @@ ActiveRecord::Schema.define(version: 2021_10_09_171219) do
     t.integer "paid", default: 0
     t.integer "seller_id"
     t.string "status"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_participants_on_room_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -117,6 +136,13 @@ ActiveRecord::Schema.define(version: 2021_10_09_171219) do
     t.integer "discount", default: 0
     t.index ["campaign_id"], name: "index_products_on_campaign_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "is_private", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -157,5 +183,9 @@ ActiveRecord::Schema.define(version: 2021_10_09_171219) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participants", "rooms"
+  add_foreign_key "participants", "users"
   add_foreign_key "products", "campaigns"
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   
+  get 'rooms/index'
   get 'carts/show'
   devise_for :users, controllers: {
         sessions: 'users/sessions',
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   post 'orders/:id/change_payment_status' => 'orders#change_payment', as: 'change_payment'
   resources :categories
   resources :sub_categories
+  resources :rooms
   
   namespace :admin do
     resources :users
@@ -46,4 +48,7 @@ Rails.application.routes.draw do
     resources :product
   end
   
+  resources :rooms do
+    resources :messages
+  end
 end
